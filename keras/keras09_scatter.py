@@ -25,7 +25,7 @@ model.fit(x_train,y_train,epochs=20,batch_size=1)
 
 # 4.평가,예측
 loss = model.evaluate(x_test,y_test)
-print('정확도 : ',loss)
+print('loss : ',loss)
 
 y_predict = model.predict(x)
 

@@ -20,6 +20,6 @@ model.compile(loss='mae',optimizer='adam')
 model.fit(x,y,epochs=100,batch_size=1)
 # 4. 예측,평가
 loss = model.evaluate(x,y)
-print('정확도 : ' , loss)
+print('loss : ' , loss)
 result = model.predict([[10, 1.4, 0]])
 print('예측값 : ' , result)

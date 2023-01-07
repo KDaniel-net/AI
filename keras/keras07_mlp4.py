@@ -25,12 +25,12 @@ model.fit(x,y,epochs=100,batch_size=1)
 
 # 4.평가,예측
 loss = model.evaluate(x,y)
-print('정확도 : ' , loss)
+print('loss : ' , loss)
 
 result = model.predict([[9]])
 print('[9]의 예측값 : ', result)
 
 '''
-정확도 :  1.1143866777420044
+loss :  1.1143866777420044
 [9]의 예측값 :  [[9.042032  1.5877768 2.6751657]]
 '''

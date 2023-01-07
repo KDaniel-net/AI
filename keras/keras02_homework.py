@@ -14,7 +14,7 @@ y = np.array([1,2,3,4,5,6,7,8,9,10])
 
 # 2.모델구성
 model = Sequential()
-model.add(Dense(2, input_dim=1))
+model.add(Dense(1, input_dim=1))
 
 # 3.컴파일
 model.compile(loss='mae' ,optimizer='adam')
@@ -22,4 +22,4 @@ model.fit(x,y,epochs=10)
 
 # 4.평가
 result =model.predict([13])
-print(result)
+print('13의 예측값 : ' , result)

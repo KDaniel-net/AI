@@ -20,3 +20,7 @@ model.fit(x,y,epochs=10)
 # 4.평가,예측
 result = model.predict([6])
 print('6의 예측값 : ' , result)
+
+'''
+6의 예측값 :  [[1.2942221]]
+'''

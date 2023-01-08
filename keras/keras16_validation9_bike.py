@@ -37,7 +37,7 @@ print(y.shape)  #(10886,) 위에서 count만 넣어주었기 때문에 10886행�
 print(test_csv) # [6493 rows x 8 columns]
 
 x_train, x_test, y_train, y_test = train_test_split(x,y,
-                                                    train_size=0.8,
+                                                    train_size=0.7,
                                                     shuffle=True,
                                                     random_state=1234)
 print(x_train.shape, x_test.shape) # (8164, 8) (2722, 8)
@@ -55,7 +55,7 @@ model.add(Dense(1))
 
 # 3.컴파일
 model.compile(loss='mse',optimizer='adam',metrics=['mse'])
-model.fit(x_train,y_train,epochs=100,validation_split=0.2)
+model.fit(x_train,y_train,epochs=100,batch_size=100,validation_split=0.3)
 
 # 4.평가
 loss = model.evaluate(x_test,y_test)

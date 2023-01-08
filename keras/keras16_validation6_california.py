@@ -37,7 +37,7 @@ model.add(Dense(1))
 # 3.컴파일,훈련
 model.compile(loss='mse', optimizer='adam',
               metrics=['mae'])
-model.fit(x_train,y_train,epochs=100,batch_size=1,validation_split=0.2)
+model.fit(x_train,y_train,epochs=100,batch_size=100,validation_split=0.2)
 
 # 4.평가,예측
 loss = model.evaluate(x_test,y_test)
@@ -54,3 +54,12 @@ print("RMSE :", RMSE(y_test, y_predict))
 r2 = r2_score(y_test, y_predict)
 print(" R2 : ", r2)
 
+'''
+loss 값 :  [2.3582639694213867, 0.5768082737922668]
+RMSE : 1.5356637029433649
+ R2 :  -0.7909942055556944
+ 
+ loss 값 :  [0.7208810448646545, 0.6250276565551758]
+RMSE : 0.849046967692111
+ R2 :  0.452523638174708
+'''

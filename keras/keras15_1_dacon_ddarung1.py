@@ -10,7 +10,10 @@ from sklearn.metrics import mean_squared_error, r2_score
 #1. 데이터
 path = './_data/ddarung/'
 train_csv = pd.read_csv(path + 'train.csv', index_col=0)
+# 경로를 일일이 치는것이 힘들기 때문에 path에 경로를 설정해주고 path를 이용하여 파일을 불러옴.
+# index_col=0 : 0번째 column은 index로 데이터가 아님을 명시해주는 것이다. (여기에서는 id), 항상 컴퓨터는 0부터 시작.
 test_csv = pd.read_csv(path + 'test.csv', index_col=0)
+
 submission = pd.read_csv(path + 'submission.csv', index_col=0)
 
 print(train_csv)
@@ -27,6 +30,7 @@ print(test_csv.info())
 print(train_csv.describe())
 
 x = train_csv.drop(['count'], axis=1)
+# trarin_set에 있는 마지막 count는 분리해줘야함.
 print(x) # [1459 rows x 9 columns]
 y = train_csv['count']
 print(y)
@@ -61,3 +65,6 @@ r2 = r2_score(y, y_predict)
 print("R2 : ", r2)
 
 y_submit = model.predict(test_csv)
+
+# 결측치란? null 값을 의미한다. (trian_set.info())을 확인하면 non-null 값으로 null 값을 계산할 수 있다.
+# 총 1459여야 하는데 1450만 있다면 9개가 null 값이다.

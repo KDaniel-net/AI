@@ -1,9 +1,8 @@
-import numpy as np
-import pandas as pd
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error, r2_score
+import numpy as np
 
 # 실습 자르기 (10:3:3)
 # 1. 데이터
@@ -14,13 +13,11 @@ y = np.array(range(1,17))
 x_train = x[:10]
 x_test = x[10:13]
 x_validation = x[13:]
+# x의 값을 3조각으로 나눈다.
 
 y_train = y[:10]
 y_test = y[10:13]
 y_validation = y[13:]
-
-
-
 
 
 # 2. 모델구성

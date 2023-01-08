@@ -1,9 +1,8 @@
-import numpy as np
-import pandas as pd
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error, r2_score
+import numpy as np
 
 # 실습 자르기 (10:3:3)
 # train_test_split이용하여 자르기

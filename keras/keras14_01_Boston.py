@@ -23,6 +23,7 @@ x_train, x_test, y_train, y_test = train_test_split(x,y,
                                                     train_size=0.75,
                                                     shuffle=True,
                                                     random_state=1)
+print(dataset.DESCR)
 
 # 2.모델구성
 model = Sequential()

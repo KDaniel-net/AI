@@ -37,25 +37,25 @@ print(y.shape)  #(10886,) 위에서 count만 넣어주었기 때문에 10886행�
 print(test_csv) # [6493 rows x 8 columns]
 
 x_train, x_test, y_train, y_test = train_test_split(x,y,
-                                                    train_size=0.7,
+                                                    train_size=0.8,
                                                     shuffle=True,
-                                                    random_state=8)
+                                                    random_state=1234)
 print(x_train.shape, x_test.shape) # (8164, 8) (2722, 8)
 print(y_train.shape, y_test.shape) # (8164,) (2722,)
 
 # 2.모델구성
 model = Sequential()
-model.add(Dense(10, input_dim=8, activation='relu'))
-model.add(Dense(20, activation='relu'))
-model.add(Dense(40, activation='relu'))
-model.add(Dense(10, activation='relu'))
-model.add(Dense(50, activation='relu'))
-model.add(Dense(2, activation='relu'))
-model.add(Dense(1, activation='linear'))
+model.add(Dense(10, input_dim=8,activation="relu"))
+model.add(Dense(20,activation="relu"))
+model.add(Dense(40,activation="relu"))
+model.add(Dense(10,activation="relu"))
+model.add(Dense(50,activation="relu"))
+model.add(Dense(2,activation="relu"))
+model.add(Dense(1))
 
 # 3.컴파일
-model.compile(loss='mae',optimizer='adam',metrics=['mse'])
-model.fit(x_train,y_train,epochs=1000,batch_size=100 ,validation_split=0.3)
+model.compile(loss='mse',optimizer='adam',metrics=['mse'])
+model.fit(x_train,y_train,epochs=100,validation_split=0.2)
 
 # 4.평가
 loss = model.evaluate(x_test,y_test)
@@ -82,4 +82,6 @@ print('R2 :' , r2)
 REMS :  153.3522665069436
 R2 : 0.2632865402462775
 
+REMS :  155.93584725576667
+R2 : 0.2869239561397381
 '''

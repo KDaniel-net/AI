@@ -50,6 +50,8 @@ model.add(Dense(20, activation='relu'))
 model.add(Dense(40, activation='relu'))
 model.add(Dense(80, activation='relu'))
 model.add(Dense(40, activation='relu'))
+model.add(Dense(60, activation='relu'))
+model.add(Dense(50, activation='relu'))
 model.add(Dense(20, activation='relu'))
 model.add(Dense(1, activation='linear'))
 
@@ -61,7 +63,8 @@ earlyStopping = EarlyStopping(monitor='val_loss',
                               patience=5,
                               restore_best_weights=True,
                               verbose=1)
-hist = model.fit(x_train,y_train,epochs=3000,batch_size=400,            
+
+hist = model.fit(x_train,y_train,epochs=3000,batch_size=20,            
           validation_split=0.2, callbacks=[earlyStopping],
           verbose=1)
 
@@ -109,3 +112,8 @@ submission_csv['count'] = y_submit
 
 submission_csv.to_csv('./_data/test/bike/' + 'submission_0109.csv')
 
+'''
+108.20174407958984
+
+108.848876953125
+'''

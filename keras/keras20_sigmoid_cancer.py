@@ -44,3 +44,8 @@ model.fit(x_train,y_train,epochs=10000,batch_size=16,
 loss,accuracy = model.evaluate(x_test,y_test)
 print('loss :',loss)
 print('accuracy :',accuracy)
+
+'''
+loss : 0.15912650525569916
+accuracy : 0.9561403393745422
+'''

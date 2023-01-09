@@ -44,10 +44,12 @@ model.fit(x_train,y_train,epochs=10000,batch_size=16,
 loss,accuracy = model.evaluate(x_test,y_test)
 print('loss :',loss)
 print('accuracy :',accuracy)
-
+import numpy as np
 y_predict = model.predict(x_test)
 
-# 1. acc을 정수로 바꿔주기 20번 _ y_predict
+y_predict = y_predict.flatten()
+y_predict = np.where(y_predict > 0.5, 1 , 0)
+
 print(y_predict[:10])              # -> 정수형으로 바꿔주기
 print(y_test[:10])
 

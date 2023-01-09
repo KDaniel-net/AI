@@ -55,7 +55,7 @@ model.add(Dense(1, activation='linear'))
 
 # 3.컴파일
 model.compile(loss='mae',optimizer='adam',metrics=['mse'])
-hist = model.fit(x_train,y_train,epochs=10,batch_size=400,
+hist = model.fit(x_train,y_train,epochs=100,batch_size=400,
                  validation_split=0.2,
                  verbose=2)
 

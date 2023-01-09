@@ -58,6 +58,7 @@ model.compile(loss='mae',optimizer='adam',metrics=['mse'])
 hist = model.fit(x_train,y_train,epochs=100,batch_size=400,
                  validation_split=0.2,
                  verbose=2)
+# model.fit에서 histroy를 반영한다.
 
 # 4.평가
 loss = model.evaluate(x_test,y_test)

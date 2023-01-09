@@ -3,6 +3,11 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 from sklearn.model_selection import train_test_split
 
+from matplotlib import font_manager, rc
+font_path = "C:\Windows\Fonts\malgun.ttf"
+font = font_manager.FontProperties(fname=font_path).get_name()
+rc('font', family=font)
+
 # 1.데이터
 datasets = load_boston()
 x = datasets.data
@@ -24,7 +29,7 @@ model.add(Dense(1))
 
 # 3.컴파일
 model.compile(loss='mse',optimizer='adam')
-hist = model.fit(x_train,y_train,epochs=300,batch_size=1,            
+hist = model.fit(x_train,y_train,epochs=10,batch_size=1,            
           validation_split=0.2,
           verbose=3)
 
@@ -51,7 +56,7 @@ plt.plot(hist.history['val_loss'],c='blue',
 plt.grid()                          # 그래프에 격자 추가
 plt.xlabel('epochs')
 plt.ylabel('loss')
-plt.title('boston loss')
+plt.title('보스턴 함수손실')
 plt.legend()                        # 범주 만들어줌
 # plt.legend(loc='upper left')        # 범주의 위치
 plt.show()

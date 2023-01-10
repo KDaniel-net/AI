@@ -30,7 +30,7 @@ model.add(Dense(1))
 # 3.컴파일
 model.compile(loss='mse',optimizer='adam')
 hist = model.fit(x_train,y_train,epochs=10,batch_size=1,            
-          validation_split=0.2,
+          validation_split=0.2,         # val_loss 생성할 값 생성
           verbose=3)
 
 # 4.평가

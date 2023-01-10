@@ -7,6 +7,7 @@ from matplotlib import font_manager, rc
 font_path = "C:\Windows\Fonts\malgun.ttf"
 font = font_manager.FontProperties(fname=font_path).get_name()
 rc('font', family=font)
+# 한글 폰트 적용 // 한글 글 깨짐 방지
 
 # 1.데이터
 datasets = load_boston()

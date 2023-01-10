@@ -19,11 +19,12 @@ print(np.unique(y, return_counts=True))
 #  array([178, 182, 177, 183, 181, 182, 181, 179, 174, 180], dtype=int64))
 
 y = to_categorical(y)
+print(type(y))      # y의 클래스 타입을 알수 있다. <class 'numpy.ndarray'>
 
 x_train,x_test,y_train,y_test = train_test_split(
     x, y, shuffle=True,
     random_state=12,
-    test_size=0.3,
+    test_size=0.2,
     stratify=y
 )
 print(y.shape)  # (1797, 10)
@@ -38,24 +39,36 @@ model.add(Dense(10,activation='softmax'))
 # 3.컴파일
 model.compile(loss='categorical_crossentropy', optimizer='adam',
               metrics=['accuracy'])
-model.fit(x_train,y_train, epochs=5, batch_size=1,
-          validation_split=0.2,
-          verbose=2)
+
+earlyStopping = EarlyStopping(monitor='val_loss',
+                             mode='min',
+                             patience=5,
+                             restore_best_weights=True,
+                             verbose=1)
+
+hist = model.fit(x_train,y_train, epochs=100, 
+                                batch_size=3,
+                                validation_split=0.2,
+                                callbacks=[earlyStopping],
+                                verbose=2)
+
+
+
 
 
 # 4.평가
 
 loss, accuracy = model.evaluate(x_test,y_test)
-print('loss : ', loss)
-print('accuracy : ', accuracy)
-y_predict = model.predict(x_test)
-print(y_predict)
-y_predict = np.argmax(y_predict, axis=1)        # 예측했던 값 y_predict = model.predict(x_test)를 넣어줌
-print(y_predict)
+print('loss : ',loss,'accuracy : ',accuracy)
+
+y_predict = np.argmax(model.predict(x_test), axis=1)        # 예측했던 값 y_predict = model.predict(x_test)를 넣어줌
+print('y_predict(예측값) :', y_predict)
+
 y_test = np.argmax(y_test, axis=1)              # y_test를 원핫인코딩 해줬던 값을 다시 원래대로 돌려주는것          
-print(y_test)
+print('y_test(원래값) :',y_test)
+
 acc = accuracy_score(y_test, y_predict)         # 그냥 구하면 정수와 실수이기 때문에 구할수가 없다.
-print(acc)
+print('acc :' ,acc)
 
 # import matplotlib.pyplot as plt
 # plt.gray()

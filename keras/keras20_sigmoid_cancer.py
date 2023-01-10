@@ -23,7 +23,7 @@ model.add(Dense(50, activation='linear',input_shape=(30,)))
 model.add(Dense(40, activation='relu'))
 model.add(Dense(30, activation='relu'))
 model.add(Dense(10, activation='relu'))
-model.add(Dense(1, activation='sigmoid'))              # 이진은 나올때 0 or 1 이 나와야 함으로 sigmoid
+model.add(Dense(1, activation='sigmoid'))              # 이진은 나올때 0 ~ 1 이 나와야 함으로 sigmoid
 
 # 3.컴파일
 model.compile(loss='binary_crossentropy',optimizer='adam',
@@ -47,10 +47,10 @@ print('accuracy :',accuracy)
 import numpy as np
 y_predict = model.predict(x_test)
 
-y_predict = y_predict.flatten()
-y_predict = np.where(y_predict > 0.5, 1 , 0)
+y_predict = y_predict.flatten()                 # -> 정수형으로 바꿔주기
+y_predict = np.where(y_predict > 0.5, 1 , 0)    # -> 정수형으로 바꿔주기
 
-print(y_predict[:10])              # -> 정수형으로 바꿔주기
+print(y_predict[:10])              
 print(y_test[:10])
 
 from sklearn.metrics import r2_score, accuracy_score

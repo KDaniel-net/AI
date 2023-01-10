@@ -1,12 +1,13 @@
-from sklearn.datasets import load_iris , load_boston
+from sklearn.datasets import load_wine
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 from sklearn.model_selection import train_test_split
 import tensorflow as tf
 from tensorflow.keras.utils import to_categorical
 import numpy as np
+
 # 1.데이터 
-datasets = load_iris()
+datasets = load_wine()
 # datasets = load_boston()
 
 # print(datasets.DESCR)                 # 판다스 .describe() /.info()
@@ -17,7 +18,10 @@ y = datasets['target']                  # .target 도 가능
 print(x)
 print(y)
       
-# print(x.shape,y.shape)                # (150, 4) (150,)
+print(x.shape,y.shape)             # (178, 13) (178,)   
+
+print(np.unique(y))             # [0 1 2]
+print(np.unique(y,return_counts=True))    
 
 # y = tf.one_hot(y,3)
 y = to_categorical(y)   # 원핫인코딩
@@ -36,7 +40,7 @@ print(y)
 
 # 2.모델구성
 model = Sequential()
-model.add(Dense(5,activation='relu', input_shape=(4,)))
+model.add(Dense(5,activation='relu', input_shape=(13,)))
 model.add(Dense(4,activation='sigmoid'))                   
 model.add(Dense(5,activation='relu'))
 model.add(Dense(2,activation='linear'))

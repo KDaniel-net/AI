@@ -28,7 +28,7 @@ model.compile(loss='mse',optimizer='adam')
 star = time.time()
 model.fit(x_train,y_train,epochs=50,batch_size=1,
           validation_split=0.2,
-          verbose=4)    # verbose 과정을 보여줄지, 0 = 안보여줌(딜레이 걸리는 시간이 줄어든다.) 1 = 보여줌(진행 형식을 보여줌) 2 = 진행 과정을 보여주지 않음(프로그레스 바 삭제) 3= 에포만 보여줌
+          verbose=2)    
 end = time.time()
 
 # 4.평가
@@ -36,3 +36,9 @@ loss = model.evaluate(x_test, y_test)
 print('loss : ' , loss)
 
 print('걸린시간 : ' , end - star)
+
+# verbose 0 : 아무것도 안보여줌
+# verbose 1 : 진행 가정을 보여줌(프로세서 바 생성)
+# verbose 2 : 진행 과정을 보여주지 않음(프로세서 바 비 생성)
+# verbose 3 : epochs만 보여줌.
+# verbose로 딜레이를 줄일수 있다. 양이 많으면 그 만큼 속도가 빨라짐

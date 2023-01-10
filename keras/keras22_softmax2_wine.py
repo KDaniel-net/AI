@@ -18,7 +18,11 @@ print(np.unique(y))             # [0 1 2]
 print(np.unique(y,return_counts=True))            
 # (array([0, 1, 2]), array([59, 71, 48], dtype=int64))
 
-y = to_categorical(y)
+from sklearn.preprocessing import OneHotEncoder
+ohe = OneHotEncoder
+
+y = ohe.fit_transform(y)
+print(y)
 
 x_train,x_test,y_train,y_test = train_test_split(
     x,y,shuffle=True,                   # False의 문제점 라벨값들이 동일하게 되기때문에 성능이 좋지 않다. (한쪽으로 몰림현상 발생)
@@ -48,7 +52,7 @@ hist = model.fit(x_train,y_train,epochs=150,batch_size=1,
 from tensorflow.keras.callbacks import EarlyStopping
 
 earlyStoping = EarlyStopping(monitor='val_loss',                # 무슨 값을 기준으로 할것인지
-                             mode='min',                        # 최소값을 찾아준다. auto,max가 더 있음
+                             mode='max',                        # 최소값을 찾아준다. auto,max가 더 있음
                              patience=5,                        # 몇번을 참아줄지
                              restore_best_weights=True,
                              verbose=1)

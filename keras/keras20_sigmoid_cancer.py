@@ -47,9 +47,10 @@ print('accuracy :',accuracy)
 import numpy as np
 y_predict = model.predict(x_test)
 
-y_predict = y_predict.flatten()                 # -> 정수형으로 바꿔주기
-y_predict = np.where(y_predict > 0.5, 1 , 0)    # -> 정수형으로 바꿔주기
-
+y_predict = y_predict.flatten()                # 보기 쉽게 하기 위하여  
+y_predict = np.where(y_predict > 0.5, 1 , 0)
+# 정수값으로 변환해준다. // 반올림
+    
 print(y_predict[:10])              
 print(y_test[:10])
 

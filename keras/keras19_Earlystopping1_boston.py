@@ -23,9 +23,9 @@ model.add(Dense(1))
 model.compile(loss='mse',optimizer='adam')
 
 from tensorflow.keras.callbacks import EarlyStopping
-earlyStoping = EarlyStopping(monitor='val_loss', 
+earlyStoping = EarlyStopping(monitor='val_loss',                # 무슨 값을 기준으로 할것인지
                              mode='min',                        # 최소값을 찾아준다. auto,max가 더 있음
-                             patience=5, 
+                             patience=5,                        # 몇번을 참아줄지
                              restore_best_weights=True,
                              verbose=1)
 

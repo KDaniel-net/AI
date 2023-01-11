@@ -45,12 +45,13 @@ x_train, x_test, y_train, y_test = train_test_split(x,y,
                                                     train_size=0.8,
                                                     random_state=40)
 
+
 from sklearn.preprocessing import MinMaxScaler,StandardScaler
 scaler = MinMaxScaler()
 # scaler = StandardScaler()
-scaler.fit(x_train)
+x_train = scaler.fit_transform(x_train)
 x_test = scaler.transform(x_test)
-x_train = scaler.transform(x_train)
+test_csv = scaler.transform(test_csv)
 
 # print(x_train.shape, x_test.shape)  #(1021, 9) (438, 9)
 # print(y_train.shape, y_test.shape)  #(1021,) (438,)
@@ -82,7 +83,7 @@ hist = model.fit(x_train,y_train,epochs=101,batch_size=30,validation_split=0.2,
 loss = model.evaluate(x_test, y_test)
 print('loss : ' , loss)
 
-''' y_predict = model.predict(x_test)
+y_predict = model.predict(x_test)
 print(y_predict)
 
 def RMSE(y_test, y_predict):
@@ -92,7 +93,7 @@ rmse = RMSE(y_test,y_predict)
 y_submit = model.predict(test_csv)
 submission['count'] = y_submit
 
-print('========================')
+''' print('========================')
 print(hist) #<keras.callbacks.History object at 0x0000016F21A30880>
 print('========================')
 print(hist.history) # hist안에 있는 리스트를 보여줌. history에는 loss값 val_loss값의 형태가 들어감
@@ -114,10 +115,9 @@ plt.ylabel('loss')
 plt.title('boston loss')
 plt.legend()                        # 범주 만들어줌
 # plt.legend(loc='upper left')        # 범주의 위치
-plt.show()
+plt.show() '''
 
-submission.to_csv( './_data/test/ddarung/' + "submission_0109_01.csv") '''
-
+submission.to_csv( './_data/test/ddarung/' + "submission_0111.csv")
 
 '''
 standerdscaler

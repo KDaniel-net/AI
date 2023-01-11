@@ -28,12 +28,12 @@ x_train,x_test,y_train,y_test = train_test_split(
     test_size=0.2,
     stratify=y                          # 같은 비율로 떨어지게 만들어 준다. 예) 첫번째 : [1 1 2 0 2 1 2 1 0 0 2 0 0 1 2]   두번째 : [0 0 2 0 2 1 0 1 0 2 2 2 1 1 1]
 )
-from sklearn.preprocessing import MinMaxScaler,StandardScaler
+''' from sklearn.preprocessing import MinMaxScaler,StandardScaler
 # scaler = MinMaxScaler()
 scaler = StandardScaler()
 scaler.fit(x_train)
 x_test = scaler.transform(x_test)
-x_train = scaler.transform(x_train)
+x_train = scaler.transform(x_train) '''
 
 # print(y_train)
 # print(y_test)
@@ -43,9 +43,9 @@ print(y)
 # 2.모델구성
 model = Sequential()
 model.add(Dense(5,activation='relu', input_shape=(4,)))
-model.add(Dense(4,activation='sigmoid'))                   
-model.add(Dense(5,activation='relu'))
-model.add(Dense(2,activation='linear'))
+model.add(Dense(4))                   
+model.add(Dense(5))
+model.add(Dense(2))
 model.add(Dense(3,activation='softmax'))       # 다중 출력 // y의class의 갯수 // 다중 출력일때는 activation의 함수는 softmax이다.
 
 # 3.컴파일

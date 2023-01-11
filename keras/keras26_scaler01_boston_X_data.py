@@ -3,7 +3,8 @@ from sklearn.metrics import mean_squared_error, r2_score
 from sklearn.model_selection import train_test_split
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
-from sklearn.preprocessing import MinMaxScaler
+from sklearn.preprocessing import StandardScaler,MinMaxScaler
+
 import numpy as np
 
 # 1.데이터
@@ -11,12 +12,17 @@ dataset = load_boston()
 x = dataset.data
 y = dataset.target
 
-scaler = MinMaxScaler()
-scaler.fit(x)                   # 범위 만큼의 가중치를 생성해준다.
-x = scaler.transform(x)         # x에 변환해서 넣어준다. 
+# scaler = MinMaxScaler()    
+# scaler.fit(x)                   # 범위 만큼의 가중치를 생성해준다.
+# x = scaler.transform(x)         # x에 변환해서 넣어준다. 
 
-print('최소값 : ',np.min(x))                # x의 최저값을 본다.
-print('최대값 : ',np.max(x))                # x의 최대값을 본다.
+# scaler = StandardScaler()
+# scaler.fit(x)
+# x = scaler.transform(x)
+# x = scaler.fit.transform(x)         #위의 2둘과 같은 내용이다.
+
+# print('최소값 : ',np.min(x))                # x의 최저값을 본다.
+# print('최대값 : ',np.max(x))                # x의 최대값을 본다.
 
 print(x)
 print(type(x))                  # <class 'numpy.ndarray'>
@@ -59,15 +65,19 @@ print(' r2 : ' , r2)
 '''
 loss : [39.0808219909668, 4.607749938964844]
 RMSE :  6.251465677035281
- r2 :  0.6054772327106046
+r2 :  0.6054772327106046
 
-변환후
+변환후 (MinMaxScaler)
 mse : 66.30453491210938 mae :  5.570650577545166
 RMSE :  8.142759439983319
- r2 :  0.3306526042992167
+r2 :  0.3306526042992167
  
 mse : 26.284421920776367 mae :  3.664135456085205
 RMSE :  5.126833419553521
- r2 :  0.7346575212796878
- 
+r2 :  0.7346575212796878
+
+변환후 (StandeardScaler)
+mse : 26.37310791015625 mae :  3.6684603691101074
+RMSE :  5.135475566515139
+r2 :  0.7337622078426989
 '''

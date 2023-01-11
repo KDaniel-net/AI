@@ -28,8 +28,8 @@ scaler = MinMaxScaler()
 # scaler = StandardScaler()
 scaler.fit(x_train)                   # 범위 만큼의 가중치를 생성해준다.
 # x_trian = scaler.fit.transform(x_train)         #위의 2둘과 같은 내용이다.
-# x_train = scaler.transform(x_train)         # x에 변환해서 넣어준다. 
-# x_test = scaler.transform(x_test)         # x에 변환해서 넣어준다. 
+x_train = scaler.transform(x_train)         # x에 변환해서 넣어준다. 
+x_test = scaler.transform(x_test)         # x에 변환해서 넣어준다. 
 
 # 2.모델구성
 model = Sequential()
@@ -78,4 +78,9 @@ r2 :  0.7346575212796878
 mse : 26.37310791015625 mae :  3.6684603691101074
 RMSE :  5.135475566515139
 r2 :  0.7337622078426989
+
+mse : 20.246946334838867 mae :  3.4498422145843506
+RMSE :  4.499660730254694
+ r2 :  0.7956061106094416
+ 
 '''

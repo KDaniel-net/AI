@@ -41,7 +41,7 @@ model.summary()
 
 # 3.컴파일
 model.compile(loss='mse',optimizer='adam')
-hist = model.fit(x_train,y_train,epochs=1000,batch_size=1,            
+hist = model.fit(x_train,y_train,epochs=10,batch_size=1000,            
           validation_split=0.2,
           verbose=3)
 
@@ -80,4 +80,7 @@ loss :  0.6326467990875244
 
 StandardScaler
 loss :  2.498596668243408
+
+함수형 출력
+loss :  0.6458807587623596
 '''

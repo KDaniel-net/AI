@@ -18,12 +18,19 @@ print(np.unique(y,return_counts=True))
 #       dtype=int64))
 
 print(type(y))  # <class 'numpy.ndarray'>
+# ------------------ 케라스 투카테고리컬 ------------------
 y = to_categorical(y)   
 # 시작을 무조건 0으로 시작한다. 값에 1~7만 있기 때문에 class하나를 더 생성한다.
+print(y.shape)  # 출력해서 확인해보기 (581012, 8)
+print(np.unique(y[:,0], return_counts=True)) # 모든행의 0번째를 출력하라.
+
 y = np.delete(y, 0, axis=1)
 #위에서 생성된 클래스 하나의 열을 삭제한다.
 # np.delets(data,number,axis=1(0 = 행을 삭제한다.)) 
-print(np.unique(y,return_counts=True))
+print(y.shape)
+print(np.unique(y[:,0],return_counts=True))             # 0번째 열에 값을 확인한다.
+print(np.unique(y[:,1],return_counts=True))            # 1번째 열에 값을 확인한다.
+
 x_train,x_test,y_train,y_test = train_test_split(x, y,
                                                  shuffle=True,
                                                  random_state=30,
@@ -72,10 +79,10 @@ loss, accuracy = model.evaluate(x_test,y_test)
 print('loss : ',loss,'accuracy : ',accuracy)
 
 y_predict = np.argmax(model.predict(x_test), axis=1)        # 예측했던 값 y_predict = model.predict(x_test)를 넣어줌
-print('y_predict(예측값) :', y_predict)
+print('y_predict(예측값) :', y_predict[:,20])
 
 y_test = np.argmax(y_test, axis=1)              # y_test를 원핫인코딩 해줬던 값을 다시 원래대로 돌려주는것          
-print('y_test(원래값) :',y_test)
+print('y_test(원래값) :',y_test[:,20])
 
 acc = accuracy_score(y_test, y_predict)         # 그냥 구하면 정수와 실수이기 때문에 구할수가 없다.
 print('acc :' ,acc)

@@ -29,8 +29,8 @@ x_train,x_test,y_train,y_test = train_test_split(
     stratify=y                          # 같은 비율로 떨어지게 만들어 준다. 예) 첫번째 : [1 1 2 0 2 1 2 1 0 0 2 0 0 1 2]   두번째 : [0 0 2 0 2 1 0 1 0 2 2 2 1 1 1]
 )
 from sklearn.preprocessing import MinMaxScaler,StandardScaler
-scaler = MinMaxScaler()
-# scaler = StandardScaler()
+# scaler = MinMaxScaler()
+scaler = StandardScaler()
 scaler.fit(x_train)
 x_test = scaler.transform(x_test)
 x_train = scaler.transform(x_train)
@@ -80,3 +80,12 @@ print(y_test)
 
 acc = accuracy_score(y_test, y_predict)         # 그냥 구하면 정수와 실수이기 때문에 구할수가 없다.
 print(acc)
+
+'''
+minmax
+0.9666666666666667
+
+standard
+0.9
+
+'''

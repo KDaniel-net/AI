@@ -7,8 +7,8 @@ from sklearn.metrics import mean_squared_error, r2_score
 import time
 start = time.time()
 # 1.데이터
-# path = './_data/ddarung/'
-path = '../_data/ddarung/'
+path = './_data/ddarung/'
+# path = '../_data/ddarung/'
 train_csv = pd.read_csv(path + 'train.csv' , index_col=0)  # index = 데이터가 아니라는걸 명시해줌
 # train_csv = pd.rean_csv('./_data/ddareum/train.csv' , index_col=0) // 위에 패치를 안했다면 계속 불러와야함
 test_csv = pd.read_csv(path + 'test.csv' , index_col=0)
@@ -46,8 +46,8 @@ x_train, x_test, y_train, y_test = train_test_split(x,y,
                                                     random_state=40)
 
 from sklearn.preprocessing import MinMaxScaler,StandardScaler
-# scaler = MinMaxScaler()
-scaler = StandardScaler()
+scaler = MinMaxScaler()
+# scaler = StandardScaler()
 scaler.fit(x_train)
 x_test = scaler.transform(x_test)
 x_train = scaler.transform(x_train)
@@ -120,6 +120,9 @@ submission.to_csv( './_data/test/ddarung/' + "submission_0109_01.csv") '''
 
 
 '''
-[6693.02099609375, 6083.33544921875, 6302.888671875, 5778.00830078125, 5467.37255859375, 6793.96142578125, 4984.14013671875, 5255.66650390625, 4915.8017578125, 4175.34765625, 5889.71728515625, 3998.33154296875, 3709.09326171875, 3583.765625, 3400.820068359375, 3454.81787109375, 3629.834228515625, 5028.6064453125, 3598.289306640625, 3749.431640625]
+standerdscaler
+loss :  [3175.223876953125, 0.007518797181546688]
 
+minmaxscaler
+loss :  [3123.401611328125, 0.007518797181546688]
 '''

@@ -28,8 +28,8 @@ x_train,x_test,y_train,y_test = train_test_split(
     stratify=y
 )
 from sklearn.preprocessing import MinMaxScaler,StandardScaler
-scaler = MinMaxScaler()
-# scaler = StandardScaler()
+# scaler = MinMaxScaler()
+scaler = StandardScaler()
 scaler.fit(x_train)
 x_test = scaler.transform(x_test)
 x_train = scaler.transform(x_train)
@@ -47,7 +47,7 @@ model.compile(loss='categorical_crossentropy', optimizer='adam',
               metrics=['accuracy'])
 
 earlyStopping = EarlyStopping(monitor='val_loss',
-                             mode='min',
+                             mode='max',
                              patience=5,
                              restore_best_weights=True,
                              verbose=1)
@@ -80,3 +80,13 @@ print('acc :' ,acc)
 # plt.gray()
 # plt.matshow(datasets.images[4])
 # plt.show()
+
+
+'''
+minmax
+acc : 0.33611111111111114
+
+standard
+acc : 0.4
+
+'''

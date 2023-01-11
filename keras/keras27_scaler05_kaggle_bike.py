@@ -42,8 +42,8 @@ x_train, x_test, y_train, y_test = train_test_split(x,y,
                                                     random_state=5)
 
 from sklearn.preprocessing import MinMaxScaler,StandardScaler
-scaler = MinMaxScaler()
-# scaler = StandardScaler()
+# scaler = MinMaxScaler()
+scaler = StandardScaler()
 scaler.fit(x_train)
 x_test = scaler.transform(x_test)
 x_train = scaler.transform(x_train)
@@ -61,15 +61,15 @@ model.add(Dense(20, activation='relu'))
 model.add(Dense(1, activation='linear'))
 
 # 3.컴파일
-model.compile(loss='mae',optimizer='adam',metrics=['mse'])
+model.compile(loss='mae',optimizer='adam',metrics=['acc'])
 from tensorflow.keras.callbacks import EarlyStopping
 earlyStopping = EarlyStopping(monitor='val_loss',
-                              mode='min',
-                              patience=5,
+                              mode='max',
+                              patience=10,
                               restore_best_weights=True,
                               verbose=1)
 
-hist = model.fit(x_train,y_train,epochs=3000,batch_size=20,            
+hist = model.fit(x_train,y_train,epochs=400,batch_size=20,            
           validation_split=0.2, callbacks=[earlyStopping],
           verbose=1)
 
@@ -77,7 +77,7 @@ hist = model.fit(x_train,y_train,epochs=3000,batch_size=20,
 loss = model.evaluate(x_test, y_test)
 print('loss : ' , loss)
 
-print('========================')
+''' print('========================')
 print(hist) #<keras.callbacks.History object at 0x0000016F21A30880>
 print('========================')
 print(hist.history) # hist안에 있는 리스트를 보여줌. history에는 loss값 val_loss값의 형태가 들어감
@@ -99,7 +99,7 @@ plt.ylabel('loss')
 plt.title('boston loss')
 plt.legend()                        # 범주 만들어줌
 # plt.legend(loc='upper left')        # 범주의 위치
-plt.show()
+plt.show() ''' 
 
 y_predict = model.predict(x_test)
 print(y_predict)
@@ -115,10 +115,15 @@ y_submit = model.predict(test_csv)
 submission_csv['count'] = y_submit
 
 
-submission_csv.to_csv('./_data/test/bike/' + 'submission_0109.csv')
+# submission_csv.to_csv('./_data/test/bike/' + 'submission_0109.csv')
 
 '''
 108.20174407958984
 
 108.848876953125
+
+MinMax
+loss :  [118.23944091796875, 0.011021307669579983]
+standard
+loss :  [112.465087890625, 0.011021307669579983
 '''

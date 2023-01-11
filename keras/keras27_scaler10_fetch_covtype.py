@@ -40,8 +40,8 @@ print(type(y)) # y 데이터의 타입을 출력해준다.
 
 
 from sklearn.preprocessing import MinMaxScaler,StandardScaler
-scaler = MinMaxScaler()
-# scaler = StandardScaler()
+# scaler = MinMaxScaler()
+scaler = StandardScaler()
 scaler.fit(x_train)
 x_test = scaler.transform(x_test)
 x_train = scaler.transform(x_train)
@@ -96,4 +96,10 @@ print('acc :' ,acc)
 
 '''
 ValueError: Shape of passed values is (116203, 1), indices imply (116203, 7)  // 0이 없어서 생성된 카테코리 하나를 제거 한다.
+
+minmax
+acc : 0.48760359026875383
+
+standard
+acc : 0.4137586809290638
 '''

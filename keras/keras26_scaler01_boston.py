@@ -29,13 +29,16 @@ print(dataset.DESCR)
 
 # 2.모델구성
 model = Sequential()
-model.add(Dense(5,input_dim=13))
-model.add(Dense(6))
+model.add(Dense(50,input_dim=13))
+model.add(Dense(90))
+model.add(Dense(25))
+model.add(Dense(51))
+model.add(Dense(40))
 model.add(Dense(1))
 
 # 3.컴파일
 model.compile(loss='mse',optimizer='adam',metrics=['mae'])
-model.fit(x_train,y_train,epochs=5,batch_size=1,validation_split=0.2)
+model.fit(x_train,y_train,epochs=10,batch_size=5,validation_split=0.2)
 
 # 4.평가,예측
 mse, mae = model.evaluate(x_test,y_test)
@@ -51,6 +54,7 @@ print('RMSE : ' , RMSE(y_test,y_predict))
 r2 = r2_score(y_test, y_predict)
 print(' r2 : ' , r2)
 
+# 무조건 좋은것이 아니니 선택해서 사용하기 바람.
 
 '''
 loss : [39.0808219909668, 4.607749938964844]
@@ -61,5 +65,9 @@ RMSE :  6.251465677035281
 mse : 66.30453491210938 mae :  5.570650577545166
 RMSE :  8.142759439983319
  r2 :  0.3306526042992167
+ 
+mse : 26.284421920776367 mae :  3.664135456085205
+RMSE :  5.126833419553521
+ r2 :  0.7346575212796878
  
 '''

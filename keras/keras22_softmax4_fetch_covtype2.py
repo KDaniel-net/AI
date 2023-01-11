@@ -5,7 +5,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 from tensorflow.keras.utils import to_categorical
 import numpy as np
-
+import pandas as pd
 
 # 1.데이터
 datasets = fetch_covtype()
@@ -18,11 +18,9 @@ print(np.unique(y,return_counts=True))
 #       dtype=int64))
 
 print(type(y))  # <class 'numpy.ndarray'>
-y = to_categorical(y)   
-# 시작을 무조건 0으로 시작한다. 값에 1~7만 있기 때문에 class하나를 더 생성한다.
-y = np.delete(y, 0, axis=1)
-#위에서 생성된 클래스 하나의 열을 삭제한다.
-# np.delets(data,number,axis=1(0 = 행을 삭제한다.)) 
+
+y = pd.get_dummies(y)  # y의 갯수만큼 열을 생성해준다. 
+
 print(np.unique(y,return_counts=True))
 x_train,x_test,y_train,y_test = train_test_split(x, y,
                                                  shuffle=True,
@@ -58,18 +56,16 @@ hist = model.fit(x_train,y_train, epochs=1, batch_size=9000,
 
 
 # 4.평가
-loss, accuracy = model.evaluate(x_test,y_test)
-print('loss : ', loss)
-print('accuracy : ', accuracy)
 
-# print(y_test[:5])
-# y_prdict = model.predict(x_test[:5])
-# print(y_prdict)
 
 from sklearn.metrics import accuracy_score
 
 loss, accuracy = model.evaluate(x_test,y_test)
 print('loss : ',loss,'accuracy : ',accuracy)
+
+y_test = y_test.values
+# y_test의 값을 numpy의 값으로 변경 해준다.
+# values를 y_test.to_numpy()로 작성해 된다.
 
 y_predict = np.argmax(model.predict(x_test), axis=1)        # 예측했던 값 y_predict = model.predict(x_test)를 넣어줌
 print('y_predict(예측값) :', y_predict)
@@ -81,5 +77,5 @@ acc = accuracy_score(y_test, y_predict)         # 그냥 구하면 정수와 실
 print('acc :' ,acc)
 
 '''
-ValueError: Shape of passed values is (116203, 1), indices imply (116203, 7)  // 0이 없어서 생성된 카테코리 하나를 제거 한다.
+ValueError: Shape of passed values is (116203, 1), indices imply (116203, 7)
 '''

@@ -20,7 +20,7 @@ print(y)
 # print(x.shape,y.shape)                # (150, 4) (150,)
 
 # y = tf.one_hot(y,3)
-y = to_categorical(y)   # 원핫인코딩
+# y = to_categorical(y)   # 원핫인코딩
 
 x_train,x_test,y_train,y_test = train_test_split(
     x,y,shuffle=True,                   # False의 문제점 라벨값들이 동일하게 되기때문에 성능이 좋지 않다. (한쪽으로 몰림현상 발생)
@@ -37,16 +37,18 @@ print(y)
 # 2.모델구성
 model = Sequential()
 model.add(Dense(5,activation='relu', input_shape=(4,)))
-model.add(Dense(4,activation='sigmoid'))                   
+model.add(Dense(40,activation='sigmoid'))                   
 model.add(Dense(5,activation='relu'))
-model.add(Dense(2,activation='linear'))
+model.add(Dense(20,activation='linear'))
 model.add(Dense(3,activation='softmax'))       # 다중 출력 // y의class의 갯수 // 다중 출력일때는 activation의 함수는 softmax이다.
 
 # 3.컴파일
-model.compile(loss='categorical_crossentropy', optimizer='adam',
+# model.compile(loss='categorical_crossentropy', optimizer='adam',
+#               metrics=['accuracy'])
+model.compile(loss='sparse_categorical_crossentropy', optimizer='adam',       # 원핫인없이 열을 맞춰줌  
               metrics=['accuracy'])
 
-model.fit(x_train,y_train, epochs=50, batch_size=1,
+model.fit(x_train,y_train, epochs=100, batch_size=1,
           validation_split=0.2,
           verbose=1)
 
@@ -66,11 +68,11 @@ y_predict = model.predict(x_test)
 print(y_predict)
 
 y_predict = np.argmax(y_predict, axis=1)        # 예측했던 값 y_predict = model.predict(x_test)를 넣어줌
-print(y_predict)
+print('y_predict(예측값) : ',y_predict)
 
 
-y_test = np.argmax(y_test, axis=1)              # y_test를 원핫인코딩 해줬던 값을 다시 원래대로 돌려주는것          
-print(y_test)
+# y_test = np.argmax(y_test, axis=1)              # 원핫을 안했기 때문에 y_test에 적용할 필요가 없음        
+print('y_test(원래값) :' ,y_test)
 
 acc = accuracy_score(y_test, y_predict)         # 그냥 구하면 정수와 실수이기 때문에 구할수가 없다.
-print(acc)
+print('acc(정확도) :' , acc)

@@ -30,9 +30,10 @@ ohe.fit(y)
 y = ohe.fit_transform(y)
 print(y[:15])
 print(type(y))
+y = y.toarray()
 
 
-'''
+
 print(np.unique(y,return_counts=True))
 x_train,x_test,y_train,y_test = train_test_split(x, y,
                                                  shuffle=True,
@@ -83,4 +84,3 @@ acc = accuracy_score(y_test, y_predict)         # 그냥 구하면 정수와 실
 print('acc :' ,acc)
 
 
-'''

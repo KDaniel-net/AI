@@ -6,6 +6,7 @@ from sklearn.metrics import accuracy_score
 from tensorflow.keras.utils import to_categorical
 import numpy as np
 import pandas as pd
+import tensorflow as tf
 
 # 1.데이터
 datasets = fetch_covtype()

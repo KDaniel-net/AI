@@ -79,10 +79,10 @@ loss, accuracy = model.evaluate(x_test,y_test)
 print('loss : ',loss,'accuracy : ',accuracy)
 
 y_predict = np.argmax(model.predict(x_test), axis=1)        # 예측했던 값 y_predict = model.predict(x_test)를 넣어줌
-print('y_predict(예측값) :', y_predict[:,10])
+print('y_predict(예측값) :', y_predict)
 
 y_test = np.argmax(y_test, axis=1)              # y_test를 원핫인코딩 해줬던 값을 다시 원래대로 돌려주는것          
-print('y_test(원래값) :',y_test[:,10])
+print('y_test(원래값) :',y_test)
 
 acc = accuracy_score(y_test, y_predict)         # 그냥 구하면 정수와 실수이기 때문에 구할수가 없다.
 print('acc :' ,acc)

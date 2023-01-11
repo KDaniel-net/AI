@@ -20,6 +20,14 @@ print(np.unique(y,return_counts=True))
 print(type(y))  # <class 'numpy.ndarray'>
 
 y = pd.get_dummies(y)  # y의 갯수만큼 열을 생성해준다. 
+# 인덱스와 헤더가 생성이 된다.
+print(y[:10])
+print(type(y))  # <class 'pandas.core.frame.DataFrame'>
+# y = y.values
+y = y.to_numpy()
+# y의 값을 numpy의 값으로 변경 해준다.
+# values를 y.to_numpy()로 작성해 된다.
+print(type(y))
 
 print(np.unique(y,return_counts=True))
 x_train,x_test,y_train,y_test = train_test_split(x, y,
@@ -27,8 +35,7 @@ x_train,x_test,y_train,y_test = train_test_split(x, y,
                                                  random_state=30,
                                                  test_size=0.2,
                                                  stratify=y)
-print(type(y))
-# y 데이터의 타입을 출력해준다.
+
 
 # 2.모델구성
 model = Sequential()
@@ -63,19 +70,16 @@ from sklearn.metrics import accuracy_score
 loss, accuracy = model.evaluate(x_test,y_test)
 print('loss : ',loss,'accuracy : ',accuracy)
 
-y_test = y_test.values
-# y_test의 값을 numpy의 값으로 변경 해준다.
-# values를 y_test.to_numpy()로 작성해 된다.
-
 y_predict = np.argmax(model.predict(x_test), axis=1)        # 예측했던 값 y_predict = model.predict(x_test)를 넣어줌
-print('y_predict(예측값) :', y_predict)
+print('y_predict(예측값) :', y_predict[:20])
 
 y_test = np.argmax(y_test, axis=1)              # y_test를 원핫인코딩 해줬던 값을 다시 원래대로 돌려주는것          
-print('y_test(원래값) :',y_test)
+print('y_test(원래값) :',y_test[:20])
 
 acc = accuracy_score(y_test, y_predict)         # 그냥 구하면 정수와 실수이기 때문에 구할수가 없다.
 print('acc :' ,acc)
 
 '''
+# 넘파이의 자료형은 판다스를 바로 받아들이지 못한다.
 ValueError: Shape of passed values is (116203, 1), indices imply (116203, 7)
 '''

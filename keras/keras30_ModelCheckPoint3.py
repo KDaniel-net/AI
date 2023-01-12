@@ -54,7 +54,7 @@ model.compile(loss='mse',optimizer='adam',metrics=['mae'])
 es = EarlyStopping(monitor='val_loss',
                               mode='min',               # val_loss는 낮을수록 좋다
                               patience=20,
-                              restore_best_weights=True,             # 기본값이 False
+                            # restore_best_weights=True,             # 기본값이 False
                               verbose=1)
 
 mcp = ModelCheckpoint(monitor='val_loss', 
@@ -107,4 +107,15 @@ print(' r2스코어 : ' , r2)
 '''
 MCP : 0.9232766676173156
 
+
+false 일때, 
+r2스코어 :  0.9066718084281759
+r2스코어 :  0.9066718084281759
+r2스코어 :  0.8988958365337258
+
+
+True 일때,
+r2스코어 :  0.9044001518077699
+r2스코어 :  0.9044001518077699
+r2스코어 :  0.9044001518077699
 '''

@@ -54,14 +54,14 @@ model.compile(loss='mse',optimizer='adam',metrics=['mae'])
 es = EarlyStopping(monitor='val_loss',
                               mode='min',               # val_loss는 낮을수록 좋다
                               patience=20,
-                            #   restore_best_weights=False,             #기본값이 False
+                              restore_best_weights=True,             # 기본값이 False
                               verbose=1)
 
 mcp = ModelCheckpoint(monitor='val_loss', 
                       mode='auto', 
                       verbos=1, 
                       save_best_only=True,          # 가장 좋은 지점만 저장해라 
-                      filepath= path+ 'MCP/keras30_model_ModelCheckPoint3.hdf5')
+                      filepath=path+ 'MCP/keras30_model_ModelCheckPoint3.hdf5')
 
 model.fit(x_train,y_train,epochs=5000,batch_size=1,validation_split=0.2,callbacks=[es, mcp],verbose=1)
 
@@ -103,6 +103,7 @@ y_predict = model3.predict(x_test)
 
 r2 = r2_score(y_test, y_predict)
 print(' r2스코어 : ' , r2)
+
 '''
 MCP : 0.9232766676173156
 

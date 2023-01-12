@@ -54,7 +54,7 @@ model.compile(loss='mse',optimizer='adam',metrics=['mae'])
 es = EarlyStopping(monitor='val_loss',
                               mode='min',               # val_loss는 낮을수록 좋다
                               patience=20,
-                              restore_best_weights=True,
+                            #   restore_best_weights=False,             #기본값이 False
                               verbose=1)
 
 mcp = ModelCheckpoint(monitor='val_loss', 
@@ -77,7 +77,7 @@ model.save(path+'keras30_ModelCheckPoint3_save_model.h5')
 # 4.평가,예측
 print('================== 1. 기본 출력 ==================')
 mse = model.evaluate(x_test,y_test)
-print ('mse :' , mse ,)
+print ('mse :' , mse )
 
 y_predict = model.predict(x_test)
 
@@ -87,7 +87,7 @@ print(' r2스코어 : ' , r2)
 print('================== 2.load_model 기본 출력 ==================')
 model2 = load_model(path + 'keras30_ModelCheckPoint3_save_model.h5')
 mse = model2.evaluate(x_test,y_test)
-print ('mse :' , mse ,)
+print ('mse :' , mse )
 
 y_predict = model2.predict(x_test)
 
@@ -97,7 +97,7 @@ print(' r2스코어 : ' , r2)
 print('================== 3. ModelCheckPoint 기본 출력 ==================')
 model3 = load_model(path + 'MCP/keras30_model_ModelCheckPoint3.hdf5')
 mse = model3.evaluate(x_test,y_test)
-print ('mse :' , mse ,)
+print ('mse :' , mse )
 
 y_predict = model3.predict(x_test)
 

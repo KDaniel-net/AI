@@ -4,7 +4,7 @@ from sklearn.model_selection import train_test_split
 from tensorflow.keras.models import Sequential, Model
 from tensorflow.keras.layers import Dense, Input
 from sklearn.preprocessing import StandardScaler,MinMaxScaler
-from tensorflow.keras.callbacks import EarlyStopping
+from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint
 import numpy as np
 
 
@@ -49,21 +49,26 @@ model.summary()
 
 
 # 3.컴파일
+model.compile(loss='mse',optimizer='adam',metrics=['mae'])
 
-earlyStopping = EarlyStopping(monitor='val_loss',
-                              mode='min',
-                              patience=5,
+es = EarlyStopping(monitor='val_loss',
+                              mode='min',               # val_loss는 낮을수록 좋다
+                              patience=20,
                               restore_best_weights=True,
                               verbose=1)
 
-model.compile(loss='mse',optimizer='adam',metrics=['mae'])
+mcp = ModelCheckpoint(monitor='val_loss', 
+                      mode='auto', 
+                      verbos=1, 
+                      save_best_only=True,          # 가장 좋은 지점만 저장해라 
+                      filepath= path+ 'MCP/keras30_model_ModelCheckPoint1.hdf5')
 
-hist = model.fit(x_train,y_train,epochs=10,batch_size=5,validation_split=0.2)
+model.fit(x_train,y_train,epochs=5000,batch_size=1,validation_split=0.2,callbacks=[es, mcp],verbose=1)
 
 
-model.save( path + 'keras29_3_svae_model.h5')
-# model.save( './_save/keras29_1_svae_model.h5')
-#  0.711610702423874
+# model.save( path + 'keras29_3_svae_model.h5')
+# # model.save( './_save/keras29_1_svae_model.h5')
+# #  0.711610702423874
 
 # 4.평가,예측
 mse, mae = model.evaluate(x_test,y_test)
@@ -79,3 +84,7 @@ print('RMSE : ' , RMSE(y_test,y_predict))
 r2 = r2_score(y_test, y_predict)
 print(' r2 : ' , r2)
 
+'''
+MCP : 0.9232766676173156
+
+'''

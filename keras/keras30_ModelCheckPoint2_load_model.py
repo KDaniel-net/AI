@@ -1,11 +1,12 @@
 from sklearn.datasets import load_boston
 from sklearn.metrics import mean_squared_error, r2_score
 from sklearn.model_selection import train_test_split
-from tensorflow.keras.callbacks import EarlyStopping
-from tensorflow.keras.models import Sequential, Model
+from tensorflow.keras.models import Sequential, Model, load_model
 from tensorflow.keras.layers import Dense, Input
 from sklearn.preprocessing import StandardScaler,MinMaxScaler
+from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint
 import numpy as np
+
 
 path = './_save/'                   # study그룹에서 작업을 진행할시
 # path = '../_save/'                # keras그룹에서 작업을 진행할시 
@@ -35,8 +36,7 @@ scaler.fit(x_train)                   # 범위 만큼의 가중치를 생성해�
 x_train = scaler.transform(x_train)         # x에 변환해서 넣어준다. 
 x_test = scaler.transform(x_test)         # x에 변환해서 넣어준다. 
 
-
-# 2.모델구성 (함수형)
+''' # 2.모델구성 (함수형)
 input1 = Input(shape=(13,))
 dense1 =Dense(50, activation='relu')(input1)
 dense2 =Dense(40, activation='sigmoid')(dense1)
@@ -47,25 +47,30 @@ model =Model(inputs=input1, outputs=output1)
 model.summary()
 # Total params: 4,611
 
-model.save_weights( path + 'keras29_5_svae_weights_1.h5')
-# 요걸로 저장해서 load하면 가짜 데이터가 생성되기 때문에 결과값이 다름 = 훈련전의 과정이 저장되기때문에
-# model.save( './_save/keras29_1_svae_model.h5')
-#  0.711610702423874
 
 # 3.컴파일
+model.compile(loss='mse',optimizer='adam',metrics=['mae'])
 
-earlyStopping = EarlyStopping(monitor='val_loss',
-                              mode='min',
-                              patience=5,
+es = EarlyStopping(monitor='val_loss',
+                              mode='min',               # val_loss는 낮을수록 좋다
+                              patience=20,
                               restore_best_weights=True,
                               verbose=1)
 
-model.compile(loss='mse',optimizer='adam',metrics=['mae'])
-model.fit(x_train,y_train,epochs=10,batch_size=5,validation_split=0.2)
+mcp = ModelCheckpoint(monitor='val_loss', 
+                      mode='auto', 
+                      verbos=1, 
+                      save_best_only=True,          # 가장 좋은 지점만 저장해라 
+                      filepath= path+ 'MCP/keras30_model_ModelCheckPoint1.hdf5')
 
-model.save_weights( path + 'keras29_5_svae_weights_2.h5')
-# 순수하게 모델의 weights만 저장된다.
+model.fit(x_train,y_train,epochs=5000,batch_size=1,validation_split=0.2,callbacks=[es, mcp],verbose=1)
 
+
+# model.save( path + 'keras29_3_svae_model.h5')
+# # model.save( './_save/keras29_1_svae_model.h5')
+# #  0.711610702423874 '''
+
+model = load_model(path+ 'MCP/keras30_model_ModelCheckPoint1.hdf5')
 
 # 4.평가,예측
 mse, mae = model.evaluate(x_test,y_test)
@@ -81,3 +86,7 @@ print('RMSE : ' , RMSE(y_test,y_predict))
 r2 = r2_score(y_test, y_predict)
 print(' r2 : ' , r2)
 
+'''
+MCP : 0.9232766676173156
+
+'''

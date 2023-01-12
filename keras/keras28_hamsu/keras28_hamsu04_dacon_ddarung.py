@@ -7,8 +7,8 @@ from sklearn.metrics import mean_squared_error, r2_score
 import time
 start = time.time()
 # 1.데이터
+# path = './_data/ddarung/'
 path = './_data/ddarung/'
-# path = '../_data/ddarung/'
 train_csv = pd.read_csv(path + 'train.csv' , index_col=0)  # index = 데이터가 아니라는걸 명시해줌
 # train_csv = pd.rean_csv('./_data/ddareum/train.csv' , index_col=0) // 위에 패치를 안했다면 계속 불러와야함
 test_csv = pd.read_csv(path + 'test.csv' , index_col=0)

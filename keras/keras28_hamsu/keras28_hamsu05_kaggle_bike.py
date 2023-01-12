@@ -124,7 +124,7 @@ y_submit = model.predict(test_csv)
 submission_csv['count'] = y_submit
 
 
-submission_csv.to_csv('./_data/test/bike/' + 'submission_0111.csv')
+submission_csv.to_csv('./_data/test/bike/' + 'submission_0112.csv')
 
 '''
 108.20174407958984

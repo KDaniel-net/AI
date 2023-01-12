@@ -1,6 +1,7 @@
 from sklearn.datasets import load_boston
 from sklearn.metrics import mean_squared_error, r2_score
 from sklearn.model_selection import train_test_split
+from tensorflow.keras.callbacks import EarlyStopping
 from tensorflow.keras.models import Sequential, Model
 from tensorflow.keras.layers import Dense, Input
 from sklearn.preprocessing import StandardScaler,MinMaxScaler
@@ -45,6 +46,9 @@ model =Model(inputs=input1, outputs=output1)
 model.summary()
 # Total params: 4,611
 
+model.save_weights( path + 'keras29_5_svae_weights_1.h5')
+# model.save( './_save/keras29_1_svae_model.h5')
+#  0.711610702423874
 
 # 3.컴파일
 
@@ -57,10 +61,9 @@ earlyStopping = EarlyStopping(monitor='val_loss',
 model.compile(loss='mse',optimizer='adam',metrics=['mae'])
 model.fit(x_train,y_train,epochs=10,batch_size=5,validation_split=0.2)
 
+model.save_weights( path + 'keras29_5_svae_weights_2.h5')
+# 순수하게 모델의 weights만 저장된다.
 
-model.save( path + 'keras29_3_svae_model.h5')
-# model.save( './_save/keras29_1_svae_model.h5')
-#  0.711610702423874
 
 # 4.평가,예측
 mse, mae = model.evaluate(x_test,y_test)

@@ -36,11 +36,11 @@ import datetime
 date = datetime.datetime.now()
 date = date.strftime("%m%d_%H%M")
 
-# filepath = './_save/mnist/cifar10'
-# filename = '{epoch:02d}-{val_loss:.2f}.hdf5'
+filepath = './_save/mnist/cifar10'
+filename = '{epoch:04d}-{val_loss:.4f}.hdf5'
 
-# mcp = ModelCheckpoint(monitor='val_loss', mode='auto', verbose=1, save_best_only=True,
-#                      filepath = filepath + 'k34_2_' + date + '_' + filename)
+mcp = ModelCheckpoint(monitor='val_loss', mode='auto', verbose=1, save_best_only=True,
+                     filepath = filepath + 'k34_2_' + date + '_' + filename)
 
 # 4.평가
 results = model.evaluate(x_test, y_test)

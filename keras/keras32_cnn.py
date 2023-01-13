@@ -3,13 +3,17 @@ from tensorflow.keras.layers import Dense, Conv2D, Flatten
 
 model = Sequential()                        
                         # 인풋은 (60000, 5, 5, 1)  / 행무시 = 데이터의 갯수는 무시한다. 
-# model.add(Conv2D(filters=10, kernel_size=(2,2), input_shape=(5,5,1)))           # N, 4, 4,10 (행 무시를 해서 통상적으로 이렇게 표시한다.) // N = 데이터의 갯수
-model.add(Conv2D(filters=10, kernel_size=(2,2), input_shape=(1,5,5))           # 4, 4,10
+# model.add(Conv2D(filters=10, kernel_size=(2,2), input_shape=(5,5,1)))         # N, 4, 4,10 (행 무시를 해서 통상적으로 이렇게 표시한다.) // N = 데이터의 갯수
+                                                                                # (batch_size, rows, cloumns, channels = filters)
+model.add(Conv2D(filters=10, kernel_size=(2,2), input_shape=(5,5,1)))           # 4, 4,10
 model.add(Conv2D(filters=5, kernel_size=(2,2)))                                 # N, 3, 3, 5
 # model.add(Conv2D(f5, (2,2))) 위의 내용과 동일                                  # N, 3, 3, 5
 model.add(Flatten())                                                            # N, 45
 model.add(Dense(10))                                                            # N, 10
+        # 인풋(batch_size, input_dim)
+# model.add(Dense(units=10))                                                    # N, 10
 model.add(Dense(1))                                                             # N, 1 
+# model.add(Dense(4, activation='relu'))                                        # N, 1 
 model.summary()
 
 

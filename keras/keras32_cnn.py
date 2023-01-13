@@ -1,12 +1,15 @@
 from tensorflow.keras.models import Sequential, Model, load_model
 from tensorflow.keras.layers import Dense, Conv2D, Flatten
 
-model = Sequential()
-model.add(Conv2D(filters=10, kernel_size=(2,2), input_shape=(5,5,1)))
-model.add(Conv2D(filters=5, kernel_size=(2,2)))
-model.add(Flatten())
-model.add(Dense(10))
-model.add(Dense(1))
+model = Sequential()                        
+                        # 인풋은 (60000, 5, 5, 1)  / 행무시 = 데이터의 갯수는 무시한다. 
+# model.add(Conv2D(filters=10, kernel_size=(2,2), input_shape=(5,5,1)))           # N, 4, 4,10 (행 무시를 해서 통상적으로 이렇게 표시한다.) // N = 데이터의 갯수
+model.add(Conv2D(filters=10, kernel_size=(2,2), input_shape=(1,5,5))           # 4, 4,10
+model.add(Conv2D(filters=5, kernel_size=(2,2)))                                 # N, 3, 3, 5
+# model.add(Conv2D(f5, (2,2))) 위의 내용과 동일                                  # N, 3, 3, 5
+model.add(Flatten())                                                            # N, 45
+model.add(Dense(10))                                                            # N, 10
+model.add(Dense(1))                                                             # N, 1 
 model.summary()
 
 
@@ -57,4 +60,9 @@ output_shape=(x-m+1, y-n+1, e)가 된다.
 <질문!!!!!!!!!!!!!!!!>
 Q) input_shape의 마지막 값이 3이면 3장 있다는 것이고, filters=10 하면 1장당 10판 해서 총 30일 줄 알았는데 아님...
 왜 input_shape의 마지막 값과는 상관이 없는지 궁금함.
+
+https://gaussian37.github.io/dl-keras-number-of-cnn-param/  파라미터 계산의 원리
+
 """
+
+

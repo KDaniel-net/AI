@@ -83,22 +83,24 @@ model = Model(inputs=input1, outputs=output1)
 #3. compile, fit
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
 
+
 from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint
 es = EarlyStopping(monitor='val_loss', mode='min', patience=5, restore_best_weights=True, verbose=1)
+
+model.fit(x_train, y_train, epochs=1000, batch_size=100, validation_split=0.2, verbose=1, callbacks=[es])
 
 import datetime
 date = datetime.datetime.now()
 date = date.strftime("%m%d_%H%M")
 
-filepath = './_save/MCP/'
+''' filepath = './_save/MCP/'
 filename = '{epoch:04d}-{val_loss:.4f}.hdf5'
 
 mcp = ModelCheckpoint(monitor='val_loss', mode='auto', verbose=1, save_best_only=True,
-                     filepath = filepath + 'k31_10_' + date + '_' + filename)
+                     filepath = filepath + 'k31_10_' + date + '_' + filename) '''
 
 import time
 start = time.time()
-model.fit(x_train, y_train, epochs=1000, batch_size=100, validation_split=0.2, verbose=1, callbacks=[es, mcp])
 end = time.time()
 
 #4. evaluate, predict

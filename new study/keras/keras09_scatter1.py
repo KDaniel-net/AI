@@ -31,5 +31,6 @@ print('loss :',loss)
 y_predict = model.predict(x)
 
 plt.scatter(x,y)
+# x,y를 점의 형태로 뿌린다.
 plt.plot(x,y_predict,color='red')
 plt.show()

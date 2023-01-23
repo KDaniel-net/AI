@@ -48,6 +48,7 @@ y_predict = model.predict(x_test)
 
 def RMSE(y_test,y_predcit):
     return np.sqrt(mean_absolute_error(y_test,y_predict))
+# 예측값과 실제값 사이의 평균오차값의 제곱근
 
 print("RMSE :",RMSE(y_test,y_predict))
 

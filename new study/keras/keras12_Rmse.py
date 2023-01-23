@@ -37,7 +37,7 @@ print("================================")
 
 def RMSE(y_test, y_predict):
         return np.sqrt(mean_squared_error(y_test, y_predict))
-    
+
 print("RMSE : ", RMSE(y_test, y_predict))
 
 # RMSE :  3.8413956502397646

@@ -30,7 +30,7 @@ model.add(Dense(10, activation='softmax'))
 # 3.컴파일
 model.compile(loss='sparse_categorical_crossentropy', optimizer='adam',
               metrics=['acc'])              
-model.fit(x_train, y_train, epochs=2, verbose=1, batch_size=32, validation_split=0.2)
+model.fit(x_train, y_train, epochs=1, verbose=1, batch_size=32, validation_split=0.2)
 
 from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint
 es = EarlyStopping(monitor='val_loss', mode='min', patience=5 ,restore_best_weights=True, verbose=1)
@@ -44,7 +44,7 @@ date = datetime.datetime.now()
 date = date.strftime("%m%d_%H%M")
 # 월(%m)일(%d)_시간(%H)분(%M) date값에 프로그래밍을 하는 날짜와 시간을 입력해준다.
 
-filepath = './_save/mnist/cifar10/'
+filepath = './_save/mnist/cifar10'
 filename = '{epoch:04d}-{val_loss:.4f}.hdf5'
 
 mcp = ModelCheckpoint(monitor='val_loss', mode='auto', verbose=1, save_best_only=True,
@@ -57,3 +57,10 @@ print('loss : ', results[0], 'acc : ', results[1])
 # metrics를 사용하여 출력값이 2개 이기 때문에 [0],[1]로 구분한다. 
 # results[0] = sparse_categorical_crossentropy , results[1] = acc값이 출력된다.
 
+'''
+loss :  2.3026537895202637 acc :  0.10000000149011612
+
+loss :  2.302647352218628 acc :  0.10000000149011612
+
+loss :  2.302610158920288 acc :  0.10000000149011612
+'''

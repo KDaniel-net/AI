@@ -41,7 +41,7 @@ import datetime
 date = datetime.datetime.now()
 date = date.strftime("%m%d_%H%M")
 
-filepath = './_saver/mnist'
+filepath = './_save/mnist'
 filename = '{epoch:02d}-{val_loss:.2f}.hdf5'
 
 mcp = ModelCheckpoint(monitor='val_loss', mode='auto', verbose=1, save_best_only=True,

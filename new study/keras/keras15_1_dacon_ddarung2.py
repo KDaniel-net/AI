@@ -7,6 +7,7 @@ import pandas as pd
 
 # 1.data
 path = './_data/ddarung/'
+path2 = './ns/ddarnug/'
 train_csv = pd.read_csv(path + 'train.csv' ,index_col=0)
 test_csv = pd.read_csv(path + 'test.csv' ,index_col=0)
 submission = pd.read_csv(path + 'submission.csv' ,index_col=0)
@@ -75,8 +76,7 @@ print(submission.shape)
 
 submission['count'] = y_submit
 print(submission)
-
-submission.to_csv( path + ' submission_0124.csv ')
+submission.to_csv( path2 + ' submission_0124.csv ' )
 
 # panda는 데이터 분석시 사용하기 좋은 API이다. : CSV read할 때에도 쓰임 : 데이터분석쪽의 scikit-learn 같은 의미이다.
 # pandas가 좋은 이유가 print하면 컬럼명과 행열수 바로 알려줌.

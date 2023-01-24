@@ -20,10 +20,10 @@ print(train_csv.info())
 print(test_csv.info())
 print(train_csv.describe())
 
-##### 결측치 제거 #####
-# print(train_csv.isnull().sum())
-# train_csv = train_csv.dropna()
-# print(train_csv.shape)
+#### 결측치 제거 #####
+print(train_csv.isnull().sum())
+train_csv = train_csv.dropna()
+print(train_csv.shape)
 
 x = train_csv.drop(['casual','registered','count'], axis=1)
 print(x)    # [10886 rows x 8 columns] 

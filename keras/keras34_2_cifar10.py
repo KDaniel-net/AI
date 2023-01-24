@@ -30,7 +30,7 @@ model.add(Dense(10, activation='softmax'))
 # 3.컴파일
 model.compile(loss='sparse_categorical_crossentropy', optimizer='adam',
               metrics=['acc'])              
-model.fit(x_train, y_train, epochs=2, verbose=1, batch_size=10000, validation_split=0.2)
+model.fit(x_train, y_train, epochs=2, verbose=1, batch_size=32, validation_split=0.2)
 
 from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint
 es = EarlyStopping(monitor='val_loss', mode='min', patience=5 ,restore_best_weights=True, verbose=1)
@@ -54,4 +54,6 @@ mcp = ModelCheckpoint(monitor='val_loss', mode='auto', verbose=1, save_best_only
 # 4.평가
 results = model.evaluate(x_test, y_test)
 print('loss : ', results[0], 'acc : ', results[1])
+# metrics를 사용하여 출력값이 2개 이기 때문에 [0],[1]로 구분한다. 
+# results[0] = sparse_categorical_crossentropy , results[1] = acc값이 출력된다.
 
